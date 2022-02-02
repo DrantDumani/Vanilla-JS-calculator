@@ -1,0 +1,143 @@
+:root {
+	--calculator: #fbffff;
+}
+
+body {
+	margin: 0;
+	box-sizing: border-box;
+	font-family: 'Orbitron', sans-serif;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	/*background: linear-gradient(#161096, #bb040a);*/
+	min-height: 100vh;
+}
+
+.title, .footer {
+	text-align: center;
+}
+
+.history, .inputs {
+	text-align: right;
+	margin: 0;
+}
+
+.history {
+	height: 35px;
+	grid-area: history;
+}
+
+.inputs {
+	grid-area: inputs;
+	height: 25px;
+}
+
+ #zero {
+	 grid-area: zero;
+}
+ #one {
+	 grid-area: one;
+}
+ #two {
+	 grid-area: two;
+}
+ #three {
+	 grid-area: three;
+}
+ #four {
+	 grid-area: four;
+}
+ #five {
+	 grid-area: five;
+}
+ #six {
+	 grid-area: six;
+}
+ #seven {
+	 grid-area: seven;
+}
+ #eight {
+	 grid-area: eight;
+}
+ #nine {
+	 grid-area: nine;
+}
+ #add {
+	 grid-area: add;
+}
+ #subtract {
+	 grid-area: subtract;
+}
+ #multiply {
+	 grid-area: multiply;
+}
+ #divide {
+	 grid-area: divide;
+}
+ #decimal {
+	 grid-area: decimal;
+}
+ #equals {
+	 grid-area: equals;
+}
+#exponent {
+	grid-area: exponent;
+}
+
+#delete {
+	grid-area: delete;
+}
+
+#plusMinus {
+	grid-area: plusMinus;
+}
+
+#clear {
+	 grid-area: clear;
+}
+
+.user-interface {
+	border:  1px solid #ced3fe;
+	display: grid;
+	grid-auto-columns: minmax(0, 1fr);
+	grid-auto-flow: column;
+	grid-template-areas: "history history history history"
+	"inputs inputs inputs inputs"
+	"clear delete exponent divide" 
+	"seven eight nine multiply" 
+	"four five six subtract" 
+	"one two three add" 
+	"plusMinus zero decimal equals";
+	font-family: 'Orbitron', sans-serif;
+}
+
+button {
+	 background-color: #ced3fe;
+	 border: 1px solid var(--calculator);
+	 padding: 20px;
+	 font-size: 24px;
+	 font-family: inherit;
+}
+
+button:hover {
+	 background-color: #e3e6ff;
+	 border: 1px solid #fff;
+}
+#equal {
+	 background-color: #fe768a;
+}
+ #equal:hover {
+	 background-color: #ffa3b1;
+}
+ #add, #subtract, #divide, #multiply {
+	 background-color: #70c64c;
+}
+ #add:hover, #subtract:hover, #divide:hover, #multiply:hover {
+	 background-color: #b4ff95;
+}
+ #clear {
+	 background-color: #ddd5df;
+}
+ #clear:hover {
+	 background-color: #f7eef9;
+}
