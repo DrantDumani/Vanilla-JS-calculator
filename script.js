@@ -1,7 +1,41 @@
+window.addEventListener("keydown", keyboardInput)
+
+function keyboardInput(event){
+	const legend = {
+		"ArrowUp": "+/-",
+		"0": "0",
+		"1": "1",
+		"2": "2",
+		"3": "3",
+		"4": "4",
+		"5": "5",
+		"6": "6",
+		"7": "7",
+		"8": "8",
+		"9": "9",
+		"Enter": "=",
+		"+": "+",
+		"-": "-",
+		"*": "*",
+		"/": "/",
+		"^": "^",
+		".": ".",
+		"Backspace": "del",
+		"Delete": "AC",
+	}
+
+	let clickable = document.evaluate(`//button[text()='${legend[event.key]}']`, document, null, XPathResult.ANY_TYPE, null).iterateNext()
+	if (clickable){
+		clickable.click()
+	}
+}
+
 let inputData = []
 let display = document.querySelector(".history")
 let currentVal = document.querySelector(".inputs")
 let precedeByOp = false
+
+console.log(getComputedStyle(currentVal).width)
 
 function init(char = ""){
 	currentVal.textContent = char
@@ -63,7 +97,13 @@ function operate(arr){
 			}
 		}
 	}
-	currentVal.textContent = copyArr[0]
+	let numStr = copyArr[0]
+	if (numStr.toString().length > 12){
+		numStr = new Intl.NumberFormat(undefined, {
+			notation: "scientific"
+		}).format(numStr)
+	}
+	currentVal.textContent = numStr
 	arr.push("=")
 	display.textContent = arr.join(" ")
 }
@@ -109,7 +149,8 @@ function clickCalcBttn(event) {
 		case "+/-":
 			if (inputData[inputData.length-1] === "=") init()
 			if (currentValStr.length > 0){
-				currentVal.textContent = currentValStr[0] === "-" ? currentValStr.slice(1, Infinity) : `-${currentValStr}` 
+				currentVal.textContent = currentValStr[0] === "-" ? currentValStr.slice(1, Infinity) : `-${currentValStr}`
+				precedeByOp = false
 			}
 			break
 		case "AC":
@@ -120,5 +161,11 @@ function clickCalcBttn(event) {
 				inputData.push(currentValStr)
 				operate(inputData)
 			}
+	}
+	if (currentVal.textContent.length > 12){
+		currentVal.textContent = currentVal.textContent.slice(0,12)
+	}
+	if (display.textContent.length > 23){
+		display.textContent = display.textContent.slice(-23)
 	}
 }
